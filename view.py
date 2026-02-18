@@ -6,8 +6,18 @@ from matplotlib.patches import Circle
 
 # Get all configurations from the confs folder
 files = glob.glob("confs/c*")
+
+
 # sort them in ascending order
-filenames = sorted(files, key=lambda x: int(x.split("/conf")[1]))
+# filenames = sorted(files, key=lambda x: int(x.split("/conf")[1]))
+
+# way to get filenames on any OS (was causing errors on my windows device)
+import os
+filenames = sorted(
+    files,
+    key=lambda x: int(os.path.basename(x).replace("conf", ""))
+)
+
 
 # Create a new figure
 fig, ax = plt.subplots()
