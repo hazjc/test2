@@ -5,7 +5,7 @@
 System::System(int N, double displacement,double radius, double boxSize, int seed) {
 
         this->boxSize= boxSize;
-        this->  dist = std::uniform_real_distribution<double>(0, 1);
+        this->dist = std::uniform_real_distribution<double>(0, 1);
         this->displacement=displacement;
         gen = std::mt19937(seed);
         
@@ -53,7 +53,10 @@ void System::enforceBoundaries(Disk & disk) {
         if (disk.y > boxSize) disk.y = boxSize;
     }
 
-// HINT: PROVIDE A DEFINITION FOR A MEMBER FUNCTION OF THE SYSTEM CLASS CALLED uniform
+double System::uniform(double min, double max) {
+    // random number between min and max using our dist generator
+    return min + (max - min) * dist(gen);
+}
 
 void System::save(const std::string &filename){
     // save state of disks to file
