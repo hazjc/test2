@@ -1,0 +1,10 @@
+# ignore config folder
+confs/
+
+# ignore compiled files
+*.exe
+*.out
+*.o
+
+# macOS stuff
+.DS_Store
