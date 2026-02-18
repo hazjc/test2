@@ -1,6 +1,5 @@
 #include <fstream>
 #include "system.h"
-#include "disk.h"
 
 System::System(int N, double displacement,double radius, double boxSize, int seed) {
 
