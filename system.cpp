@@ -27,30 +27,33 @@ bool System::overlap(int i){
 }
 
 void System::step() {
-    for (size_t i=0; i<disks.size(); ++i) 
-    {
-        int selected_disk = std::rand() % disks.size();
-        double oldx = disks[selected_disk].x;
-        double oldy = disks[selected_disk].y;
-        double dx = uniform(-displacement, displacement);
-        double dy = uniform(-displacement, displacement);
-        this->disks[selected_disk].move(dx, dy);
-        
-        enforceBoundaries(disks[selected_disk]);
+    int selected_disk = std::rand() % disks.size();
+    double oldx = disks[selected_disk].x;
+    double oldy = disks[selected_disk].y;
+    double dx = uniform(-displacement, displacement);
+    double dy = uniform(-displacement, displacement);
+    this->disks[selected_disk].move(dx, dy);
+    
+    enforceBoundaries(disks[selected_disk]);
 
-        if (overlap(selected_disk)){
-            disks[selected_disk].x = oldx;
-            disks[selected_disk].y = oldy;
-        }
-       
+    if (overlap(selected_disk)){
+        disks[selected_disk].x = oldx;
+        disks[selected_disk].y = oldy;
     }
+   
 }
 void System::enforceBoundaries(Disk & disk) {
-        if (disk.x < 0) disk.x = 0;
-        if (disk.x > boxSize) disk.x = boxSize;
-        if (disk.y < 0) disk.y = 0;
-        if (disk.y > boxSize) disk.y = boxSize;
+    // bounce mechanic if our random move over shoots the box boundaries
+    // -> prevents disks getting "stuck" on walls, easier to see with big displacement sizes
+    while (disk.x < 0 || disk.x > boxSize) {
+        if (disk.x < 0) disk.x = -disk.x;
+        else disk.x = 2*boxSize - disk.x;
     }
+    while (disk.y < 0 || disk.y > boxSize) {
+        if (disk.y < 0) disk.y = -disk.y;
+        else disk.y = 2*boxSize - disk.y;
+    }
+}
 
 double System::uniform(double min, double max) {
     // random number between min and max using our dist generator
