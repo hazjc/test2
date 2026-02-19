@@ -2,7 +2,6 @@
 #include <cstdlib>
 #include <exception>
 
-
 /**
  * @brief Entry point of the program.
  *
@@ -12,7 +11,25 @@
  * ./sim [N] [iterations] [maxDisplacement] [dt] [L] [seed]
  * 
  */
+
+
+    // for config folder creation
+#ifdef _WIN32
+  #include <direct.h>   // _mkdir
+#else
+  #include <sys/stat.h> // mkdir
+#endif
+
 int main(int argc, char* argv[]) {
+
+    // make config folder
+#ifdef _WIN32
+    _mkdir("confs");
+#else
+    mkdir("confs", 0777);
+#endif
+
+
     // default parameters
     int N = 20;
     int iterations = 500;

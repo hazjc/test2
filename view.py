@@ -54,12 +54,12 @@ def update(_):
 ani = FuncAnimation(fig, update, frames=len(filenames), blit=True, interval = initial_interval)
 
 ax_speed = plt.axes([0.15, 0.06, 0.7, 0.03])
-speed_slider = Slider(ax_speed, "Speed", valmin=1, valmax=10.0, valinit=1.0)
+speed_slider = Slider(ax_speed, "Speed", valmin=1, valmax=100.0, valinit=1.0)
 
 def on_speed_change(val):
     global speed_multiplier
     speed_multiplier = float(val)
-    print("speed_multiplier =", speed_multiplier)
+    # print("speed_multiplier =", speed_multiplier)
 
 speed_slider.on_changed(on_speed_change)
 

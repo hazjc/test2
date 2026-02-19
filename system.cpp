@@ -10,16 +10,19 @@ System::System(int N, double displacement,double radius, double boxSize, int see
         
         int nSide = static_cast<int>(boxSize/ (2*radius));
 
-        for (int i = 0; i < nSide && disks.size() < N; ++i) {
-            for (int j = 0; j < nSide && disks.size() < N; ++j) {
+        // fix sign and unsigned comparison warnings
+        const size_t target = static_cast<size_t>(N);
+        
+        for (int i = 0; i < nSide && disks.size() < target; ++i) {
+            for (int j = 0; j < nSide && disks.size() < target; ++j) {
                 disks.push_back(Disk(i * 2*radius, j * 2*radius, radius));
             }
         }
     }   
 
 bool System::overlap(int i){
-    for (int j = 0; j < disks.size(); ++j) {
-        if (i!=j && disks[i].distance(disks[j]) < (disks[i].radius + disks[j].radius) ) {
+    for (size_t j = 0; j < disks.size(); ++j) {
+        if (static_cast<size_t>(i)!=j && disks[i].distance(disks[j]) < (disks[i].radius + disks[j].radius) ) {
             return true;
         }
     }

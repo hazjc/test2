@@ -35,6 +35,7 @@ Tag: `v0.1-headers`
 
 -   Corrected `System::step()` so that exactly one disk move is attempted per step
 
+
 Tag: `v0.2-simulation-fixed`
 
 ### Visualisation improvements
@@ -47,7 +48,7 @@ Tag: `v0.2-simulation-fixed`
 
 Tag: `v0.3-visualisation`
 
-### CLI
+### CLI arguments
 
 The program now accepts runtime parameters. They also have default values if you choose not to
 
@@ -81,6 +82,15 @@ If a disk overshoots a boundary
 
 Tag: `v1.0-final`
 
+### Polish
+
+-	Added a self-creating `confs/` folder in `main.cpp` so the program is self contained
+-	Fixed signed and unsigned comparison warnings in `system.cpp` by casting first
+-	Increased speed multiplier from a maxium of `10` to now `100` in the visualiser `view.py`
+-	Removed debug `print()` messages in visualisation
+
+Tag: `v1.1-final-polished`
+
 ## How to navigate modifications using Git
 
 To view the full progression:
@@ -99,6 +109,8 @@ Tagged versions:
 
 -   `v1.0-final`
 
+-	`v1.1-final-polished`
+
 Each tag representing a completed stage of development.
 
 ## Building the code
@@ -115,7 +127,7 @@ To run a simulation:
 ./sim
 ```
 
-with arguments (if any) of your choice
+Add arguments (if any) of your choice (See the [CLI Arguments](#cli-arguments) section for the list)
 
 For example, a simulation with 10,000 steps:
 
@@ -131,7 +143,7 @@ After running the simulation run:
 python view.py
 ```
 
-The visualisere:
+The visualiser:
 
 -   Loads configs from `confs/`
 
